@@ -6,7 +6,12 @@ const BASE_END_POINT = `http://www.omdbapi.com/?apikey=${API_KEY}&`;
 
 export class Detail extends Component {
   static propTypes = {
-    id: PropTypes.string
+    match: PropTypes.shape({
+      params: PropTypes.object,
+      isExact: PropTypes.bool,
+      path: PropTypes.string,
+      url: PropTypes.string
+    })
   };
 
   state = {
@@ -27,7 +32,8 @@ export class Detail extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props;
+    console.log(this.props);
+    const { id } = this.props.match.params;
     this._fetchMovie({ id });
   }
 
@@ -37,7 +43,7 @@ export class Detail extends Component {
       <div>
         <button onClick={this._goBack}>Volver</button>
         <h1>{Title}</h1>
-        <img src={Poster} />
+        <img src={Poster} alt={Title} />
         <h3>{Actors}</h3>
         <span>{Metascore}</span>
         <p>{Plot}</p>
