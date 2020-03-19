@@ -20,7 +20,7 @@ export class SearchForm extends Component {
     fetch(`${BASE_END_POINT}s=${inputMovie}`)
       .then(response => response.json())
       .then(results => {
-        const { Search, totalResults } = results;
+        const { Search = [], totalResults = "0" } = results;
         console.log({ Search, totalResults });
         this.props.onResults(Search);
       });
